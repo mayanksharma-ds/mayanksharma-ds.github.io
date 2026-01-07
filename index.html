@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mayank Sharma | Data Scientist Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+
+<style>
+/* ================= GLOBAL RESETS ================= */
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --bg-main:#020617;
+  --text-main:#f8fafc;
+  --text-muted:#94a3b8;
+  --neon:#22d3ee;
+  --violet:#8b5cf6;
+  --border:rgba(255,255,255,.18);
+  --glass: rgba(15, 23, 42, 0.6);
+}
+
+body{
+  font-family:"Segoe UI",sans-serif;
+  background-color: var(--bg-main);
+  color:var(--text-main);
+  scroll-behavior:smooth;
+  overflow-x: hidden;
+}
+
+/* CUSTOM SCROLLBAR */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-main);
+}
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(var(--neon), var(--violet));
+    border-radius: 10px;
+}
+
+/* ================= LIVE BACKGROUND (PARTICLES) ================= */
+#particles-js {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1; 
+  top: 0;
+  left: 0;
+  background-color: #020617;
+}
+
+/* ================= HERO SECTION ================= */
+.hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 12%;
+  overflow: hidden;
+  z-index: 10; 
+  background: #000; 
+}
+
+.hero video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-2;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(120deg,rgba(2,6,23,.9),rgba(15,23,42,.8)),
+    radial-gradient(circle at top,rgba(34,211,238,.15),transparent 55%);
+  z-index:-1;
+}
+
+.hero-text{max-width:60%}
+.hero-text h1{
+  font-size:3.8rem;
+  letter-spacing:1px;
+  animation: fadeInDown 1s ease;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-text h2{
+  margin:14px 0;
+  background:linear-gradient(90deg,var(--neon),var(--violet));
+  -webkit-background-clip:text;
+  background-clip: text;
+  -webkit-text-fill-color:transparent;
+}
+.hero-text p{
+  font-size:1.1rem;
+  line-height:1.9;
+  color:var(--text-muted);
+}
+.hero-text a{
+  display:inline-block;
+  margin-top:30px;
+  padding:14px 36px;
+  background:linear-gradient(135deg,var(--neon),var(--violet));
+  color:#000;
+  font-weight:600;
+  border-radius:14px;
+  text-decoration:none;
+  box-shadow: 0 0 25px rgba(34,211,238,.45);
+  transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.hero-text a:hover{
+  transform: scale(1.05) translateY(-5px);
+  box-shadow: 0 0 40px rgba(34,211,238,.7);
+}
+
+.hero-img {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+}
+
+.hero-img img {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  object-fit: cover;
+  position: relative;
+  z-index: 5;
+  border: 4px solid rgba(255,255,255,0.1);
+  filter: grayscale(20%);
+  transition: all 0.5s ease;
+  animation: float 4s ease-in-out infinite;
+}
+
+.hero-img::before {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 2px dashed var(--neon);
+  animation: rotateClockwise 10s linear infinite;
+  opacity: 0.5;
+}
+
+.hero-img::after {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  border: 1px solid var(--violet);
+  animation: pulseRotate 6s linear infinite;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+}
+
+@keyframes rotateClockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulseRotate {
+  0% { transform: scale(0.9) rotate(0deg); opacity: 0.8; }
+  50% { transform: scale(1.1) rotate(180deg); opacity: 0.3; }
+  100% { transform: scale(0.9) rotate(360deg); opacity: 0.8; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.hero-img:hover img {
+  filter: grayscale(0%);
+  transform: scale(1.05);
+  box-shadow: 0 0 50px rgba(34, 211, 238, 0.6);
+  border-color: var(--neon);
+}
+
+
+
+/* ================= DYNAMIC ALIVE SIDEBAR ================= */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 280px;
+  height: 100vh;
+  background: linear-gradient(135deg, rgba(2, 6, 23, 0.95), rgba(15, 23, 42, 0.85), rgba(2, 6, 23, 0.95));
+  background-size: 400% 400%;
+  animation: sidebarGradient 15s ease infinite; /* Liquid background movement */
+  backdrop-filter: blur(25px);
+  padding: 40px 20px;
+  border-right: 1px solid var(--border);
+  transform: translateX(-100%);
+  transition: 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes sidebarGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.sidebar.active {
+  transform: translateX(0);
+}
+
+.sidebar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -1px;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, var(--neon), var(--violet), transparent);
+  box-shadow: 0 0 15px var(--neon);
+}
+
+/* --- SIDEBAR IMAGE ALIVE EFFECT --- */
+.sidebar-img-container {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  margin: 0 auto 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  z-index: 5;
+  border: 3px solid var(--neon);
+  box-shadow: 0 0 25px rgba(34, 211, 238, 0.3);
+  animation: sidebarImgFloat 4s ease-in-out infinite;
+}
+
+/* Pulsing background behind image */
+.sidebar-img-container::before {
+  content: "";
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: var(--neon);
+  filter: blur(20px);
+  opacity: 0.2;
+  animation: sidebarPulse 3s ease-in-out infinite;
+}
+
+@keyframes sidebarImgFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-10px) scale(1.02); }
+}
+
+@keyframes sidebarPulse {
+  0%, 100% { transform: scale(1); opacity: 0.2; }
+  50% { transform: scale(1.4); opacity: 0.4; }
+}
+
+.sidebar h3 {
+  text-align: center;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+}
+
+.sidebar p.role {
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, var(--neon), var(--violet));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 30px;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-grow: 1;
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  padding: 12px 18px;
+  text-decoration: none;
+  border-radius: 12px;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid transparent;
+  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar a span {
+  margin-right: 12px;
+  font-size: 1.1rem;
+}
+
+.sidebar a:hover {
+  background: rgba(34, 211, 238, 0.15);
+  border-color: var(--neon);
+  color: var(--neon);
+  transform: translateX(10px);
+  box-shadow: 0 0 15px rgba(34, 211, 238, 0.4);
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #22c55e;
+  border-radius: 50%;
+  margin-right: 8px;
+  box-shadow: 0 0 10px #22c55e;
+  animation: blink 2s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.sidebar-footer p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+}
+
+/* ================= MAIN CONTENT AREA ================= */
+.main{
+  padding:100px 12%;
+  transition:.45s;
+  position: relative;
+  z-index: 5; 
+}
+.main.shift{margin-left:280px}
+
+section{margin-bottom:120px}
+.section-title{
+  font-size:2.4rem;
+  margin-bottom:30px;
+  padding-left:18px;
+  border-left:6px solid;
+  border-image:linear-gradient(180deg,var(--neon),var(--violet)) 1;
+}
+
+.card{
+  background: var(--glass); 
+  backdrop-filter:blur(10px);
+  padding:34px;
+  border-radius:24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.3);
+  border: 1px solid var(--border);
+  line-height:1.9;
+  margin-bottom:30px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.card:hover {
+    border-color: var(--neon);
+    box-shadow: 0 20px 50px rgba(34, 211, 238, 0.2);
+}
+
+.filters{text-align:center;margin-bottom:40px}
+.filters button{
+  padding:12px 26px; margin:6px; border:none; border-radius:30px;
+  background:rgba(255,255,255,.08); color:var(--text-main); cursor:pointer;
+  transition: 0.3s;
+}
+.filters button.active{
+  background:linear-gradient(135deg,var(--neon),var(--violet));
+  color:#000; box-shadow:0 0 25px rgba(34,211,238,.5);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:30px;
+}
+
+.project{ cursor:pointer; transition:.4s; }
+.project img{
+  width:100%; height:180px; object-fit:cover; border-radius:16px;
+  margin-bottom:15px; transition:.4s;
+}
+.project:hover img{ transform:scale(1.05); }
+
+/* ================= MODALS (FIXED OVERLAP) ================= */
+.modal{
+  position:fixed; inset:0; background:rgba(2,6,23,.95);
+  display:none; align-items:center; justify-content:center; 
+  z-index:1100; /* Higher than sidebar z-index (999) */
+  backdrop-filter: blur(10px);
+}
+.modal-content{
+  background:linear-gradient(180deg,#020617,#020617dd);
+  max-width:850px; width: 90%; padding:40px;
+  border-radius:26px; border:1px solid var(--border);
+  transform: scale(0.7);
+  transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.modal.active .modal-content {
+    transform: scale(1);
+}
+.modal-content img{ width:100%; border-radius:16px; margin:20px 0; }
+.close{
+  margin-top:25px;
+  background:linear-gradient(90deg,var(--neon),var(--violet));
+  -webkit-background-clip:text; background-clip: text;
+  -webkit-text-fill-color:transparent;
+  font-weight:600; cursor:pointer;
+  display: inline-block;
+}
+
+/* HELPER CLASS TO DISABLE SCROLL */
+.no-scroll { overflow: hidden; }
+
+/* ================= CONTACT ================= */
+form input,form textarea{
+  width:100%; padding:14px; margin-bottom:15px; border-radius:14px;
+  border:1px solid var(--border); background:#020617; color:var(--text-main);
+  transition: 0.3s;
+}
+form input:focus, form textarea:focus{
+    outline: none;
+    border-color: var(--neon);
+    box-shadow: 0 0 15px rgba(34,211,238,0.3);
+}
+form button{
+  padding:14px 36px; border:none; border-radius:14px;
+  background:linear-gradient(135deg,var(--neon),var(--violet));
+  color:#000; font-weight:600; box-shadow:0 0 30px rgba(34,211,238,.5);
+  cursor: pointer;
+  transition: 0.3s;
+}
+form button:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 0 45px rgba(34, 211, 238, .7);
+}
+
+/* ================= MOBILE RESPONSIVENESS ================= */
+
+/* Toggle Button for Mobile */
+.menu-toggle {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 2100; /* Increased to stay above all elements */
+    background: var(--glass);
+    border: 1px solid var(--neon);
+    color: var(--neon);
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    backdrop-filter: blur(10px);
+}
+
+@media (max-width: 1024px) {
+    .hero {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        padding: 100px 5% 40px 5%; /* Adjusted padding for better spacing */
+        height: auto;
+        min-height: 100vh;
+    }
+
+    /* REORDERING: Image moves to top */
+    .hero-img {
+        order: 1; 
+        margin-bottom: 50px; /* Space between image and text below it */
+    }
+
+    .hero-text {
+        order: 2;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .hero-text h1 { font-size: 2.5rem; }
+    .hero-text p { font-size: 1rem; }
+
+    .hero-img img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .hero-img::before, .hero-img::after {
+        width: 240px; height: 240px;
+    }
+
+    .main { padding: 60px 5%; }
+    
+    /* Reset shift for mobile */
+    .main.shift { margin-left: 0 !important; }
+
+    .menu-toggle { display: block; }
+
+    .sidebar {
+        width: 80%;
+        max-width: 300px;
+        z-index: 2200; /* Ensures sidebar covers the menu button when open */
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-text h1 { font-size: 2rem; }
+    .section-title { font-size: 1.8rem; }
+    .card { padding: 20px; }
+    
+    .grid {
+        grid-template-columns: 1fr;
+    }
+} 
+
+</style>
+</head>
+
+<body>
+
+<div id="particles-js"></div>
+
+<div class="hero">
+  <video src="background.mp4" autoplay muted loop playsinline></video>
+  <div class="hero-text">
+    <h1 data-aos="fade-right">Mayank Sharma</h1>
+    <h2 data-aos="fade-right" data-aos-delay="200">Aspiring Data Scientist & Data Analyst</h2>
+    <p data-aos="fade-right" data-aos-delay="400">
+      Disciplined, detail-oriented data science student passionate about
+      Machine Learning, NLP, and data-driven insights.
+    </p>
+    <a href="resume.pdf" download data-aos="zoom-in" data-aos-delay="600">Download Resume</a>
+  </div>
+  <div class="hero-img" data-aos="zoom-in" data-aos-duration="1000">
+      <img src="profile.png" alt="Profile">
+  </div>
+</div>
+
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-img-container">
+    <img src="profile.png" alt="Profile">
+  </div>
+  <h3>Mayank Sharma</h3>
+  <p class="role">Data Scientist</p>
+  
+  <div class="nav-links">
+    <a href="mailto:mayanksharma6002@gmail.com"><span>📧</span> Email</a>
+    <a href="https://github.com/Mayanksharma8853" target="_blank"><span>💻</span> GitHub</a>
+    <a href="https://www.linkedin.com/in/mayanksharma8853" target="_blank"><span>💼</span> LinkedIn</a>
+    <a href="resume.pdf" download><span>📄</span> Resume</a>
+  </div>
+
+  
+  <div class="sidebar-footer">
+  <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px; font-size: 0.7rem;">
+    <p style="margin-top: 5px;">📍 <strong>Location:</strong> Delhi, India</p>
+    <p style="margin-top: 5px;">🚀 <strong>Open to:</strong> Internships / Junior Roles</p>
+  </div>
+  <p style="margin-top: 15px; font-size: 0.65rem; opacity: 0.6;">&copy; 2026 Mayank Sharma. All rights reserved.</p>
+</div>
+</div>
+
+<div class="main" id="main">
+
+  <section id="about" data-aos="fade-up">
+    <h2 class="section-title">About Me</h2>
+    <div class="card js-tilt" data-tilt-perspective="2000">
+      <p>
+        I am an aspiring Data Scientist currently pursuing a B.Sc. in Data Science, with a strong interest in analyzing data and extracting meaningful insights. I enjoy working with data, identifying patterns, and using analytical techniques to solve real-world problems.
+      </p>
+      <p>
+        I have a foundational understanding of statistics, Python, SQL, Excel, and data visualization, along with hands-on experience through academic and personal projects. I am a quick learner who enjoys continuous learning and staying updated with new tools and technologies in the data science field.
+      </p>
+    </div>
+  </section>
+
+  
+
+  <section data-aos="fade-up">
+  <h2 class="section-title">Academic Background</h2>
+  <div class="card">
+    <div style="border-left: 2px solid var(--violet); padding-left: 25px; position: relative;">
+      <div style="position: absolute; left: -9px; top: 0; width: 16px; height: 16px; background: var(--violet); border-radius: 50%; box-shadow: 0 0 10px var(--violet);"></div>
+      <h3 style="color: var(--text-main);">B.Sc. in Data Science</h3>
+      <p style="color: var(--neon); font-weight: bold; margin-bottom: 10px;">Expected Graduation: 2027</p>
+      <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+        Currently developing a rigorous foundation in the end-to-end data lifecycle—from implementing predictive architectures in Machine Learning to processing unstructured information through Natural Language Processing.
+      </p>
+    </div>
+  </div>
+</section>
+
+  <section data-aos="fade-up">
+    <h2 class="section-title">Why Data Science?</h2>
+    <div class="card js-tilt">
+      <p>
+        I chose data science because it empowers me to transform raw data into actionable insights that drive smarter decisions. I enjoy analyzing data, identifying patterns, and solving real-world problems using statistics, programming, and machine learning. What excites me most is that data science has applications across every industry, allowing me to create measurable impact while continuously learning and adapting to new technologies.
+        Additionally, I like how data science bridges business understanding and technical skills, enabling data-driven strategies. It gives me the opportunity to work on meaningful problems and contribute to innovation.
+      </p>
+    </div>
+  </section>
+
+  <section data-aos="fade-up">
+    <h2 class="section-title">Skills & Expertise</h2>
+    <div class="card js-tilt">
+      <p><strong>Python:</strong> Data analysis, ML modeling, scripting</p>
+      <p><strong>SQL:</strong> Querying, joins, data extraction</p>
+      <p><strong>Excel:</strong> Reporting, pivot tables, analytics</p>
+      <p><strong>Power BI:</strong> KPI dashboards, insights</p>
+      <p><strong>Machine Learning:</strong> Regression, classification</p>
+      <p><strong>Deep Learning:</strong> Neural network fundamentals</p>
+      <p><strong>NLP:</strong> Text processing, classification, extraction</p>
+    </div>
+  </section>
+
+
+  
+  <section data-aos="fade-up">
+  <h2 class="section-title">Tools & Libraries</h2>
+  <div class="card" style="overflow: hidden; white-space: nowrap; padding: 20px 0;">
+    <div class="marquee" style="display: inline-block; animation: scroll 20s linear infinite;">
+      <span style="margin: 0 20px; font-weight: bold; color: var(--neon);">NumPy</span>
+      <span style="margin: 0 20px; font-weight: bold; color: var(--violet);">Pandas</span>
+      <span style="margin: 0 20px; font-weight: bold; color: var(--neon);">Scikit-Learn</span>
+      <span style="margin: 0 20px; font-weight: bold; color: var(--violet);">TensorFlow</span>
+      <span style="margin: 0 20px; font-weight: bold; color: var(--neon);">Keras</span>
+      <span style="margin: 0 20px; font-weight: bold; color: var(--violet);">Matplotlib</span>
+      <span style="margin: 0 20px; font-weight: bold; color: var(--neon);">Seaborn</span>
+      <span style="margin: 0 20px; font-weight: bold; color: var(--violet);">NLTK</span>
+      <span style="margin: 0 20px; font-weight: bold; color: var(--neon);">Power BI</span>
+      <span style="margin: 0 20px; font-weight: bold; color: var(--violet);">MySQL</span>
+    </div>
+    <div class="marquee" style="display: inline-block; animation: scroll 20s linear infinite;">
+      <span style="margin: 0 20px; font-weight: bold; color: var(--neon);">NumPy</span>
+      <span style="margin: 0 20px; font-weight: bold; color: var(--violet);">Pandas</span>
+      <span style="margin: 0 20px; font-weight: bold; color: var(--neon);">Scikit-Learn</span>
+      <span style="margin: 0 20px; font-weight: bold; color: var(--violet);">TensorFlow</span>
+      <span style="margin: 0 20px; font-weight: bold; color: var(--neon);">Keras</span>
+      <span style="margin: 0 20px; font-weight: bold; color: var(--violet);">Matplotlib</span>
+      <span style="margin: 0 20px; font-weight: bold; color: var(--neon);">Seaborn</span>
+      <span style="margin: 0 20px; font-weight: bold; color: var(--violet);">NLTK</span>
+      <span style="margin: 0 20px; font-weight: bold; color: var(--neon);">Power BI</span>
+      <span style="margin: 0 20px; font-weight: bold; color: var(--violet);">MySQL</span>
+    </div>
+  </div>
+</section>
+
+<style>
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+.marquee { display: inline-block; }
+</style>
+
+
+
+
+  <section id="projects" data-aos="fade-up">
+    <h2 class="section-title">Projects</h2>
+
+    <div class="filters">
+      <button class="active" onclick="filterProjects(event, 'all')">All</button>
+      <button onclick="filterProjects(event, 'nlp')">NLP</button>
+      <button onclick="filterProjects(event, 'ml')">Machine Learning</button>
+      <button onclick="filterProjects(event, 'insights')">Data Insights</button>
+      <button onclick="filterProjects(event, 'dl')">Deep Learning</button>
+    </div>
+
+    <div class="grid">
+      <div class="card project nlp js-tilt" onclick="openModal('resumeModal')" data-tilt-scale="1.05">
+        <img src="resume_parser.jpg" alt="Resume Parser">
+        <h3>Resume Parser (NLP)</h3>
+        <p>Resume data extraction using Regular Expressions.</p>
+      </div>
+      
+
+      <div class="card project nlp ml js-tilt" onclick="openModal('emotionModal')" data-tilt-scale="1.05">
+        <img src="emotion_classifier.jpg" alt="Emotion Classifier">
+        <h3>Emotion Classifier</h3>
+        <p>Emotion detection using Logistic Regression.</p>
+      </div>
+
+
+
+
+       <div class="card project nlp ml js-tilt" onclick="openModal('restaurantModal')" data-tilt-scale="1.05">
+        <img src="restaurant.jpg" alt="Restaurant Review Classification">
+        <h3>Restaurant Review Classification</h3>
+        <p>Restaurant review sentiment classification using Bag of Words and Naive Bayes</p>
+      </div>
+
+       <div class="card project nlp ml js-tilt" onclick="openModal('imdbModal')" data-tilt-scale="1.05">
+        <img src="imdb.jpg" alt="Emotion Classifier">
+        <h3>IMDB movie review classification</h3>
+        <p>IMDB movie review classification using Bag of Words and TF-IDF for sentiment analysis.</p>
+      </div>
+
+
+
+      <div class="card project ml js-tilt" onclick="openModal('diabetesModal')" data-tilt-scale="1.05">
+        <img src="diabetes_prediction.jpg" alt="Diabetes Prediction">
+        <h3>Diabetes Prediction</h3>
+        <p>Predictive modeling using Machine Learning to identify diabetes risk factors.</p>
+      </div>
+
+      <div class="card project insights js-tilt" onclick="openModal('weatherModal')" data-tilt-scale="1.05">
+        <img src="weather_dashboard.jpg" alt="Weather Dashboard">
+        <h3>Weather Analytics Dashboard</h3>
+        <p>KPI-driven Power BI insights.</p>
+      </div>
+
+
+
+      <div class="card project insights js-tilt" onclick="openModal('primeModal')" data-tilt-scale="1.05">
+        <img src="prime_dashboard.jpg" alt="Amazon Prime Dashboard">
+        <h3>Amazon Prime Dashboard</h3>
+        <p>Amazon Prime Video content data summary.</p>
+      </div>
+
+
+      
+      <div class="card project insights js-tilt" onclick="openModal('blinkitModal')" data-tilt-scale="1.05">
+        <img src="blinkit_dashboard.jpg" alt="Blinkit Dashboard">
+        <h3>Blinkit Sales Analysis</h3>
+        <p>Power BI dashboard analyzing sales, items, and ratings.</p>
+      </div>
+      
+
+      <div class="card project insights js-tilt" onclick="openModal('accidentModal')" data-tilt-scale="1.05">
+        <img src="road_accident.jpg" alt="Road Accident Analysis">
+        <h3>Road Accident Analysis</h3>
+        <p>Detailed visualization of casualty patterns and conditions.</p>
+      </div>
+      
+      <div class="card project dl js-tilt" onclick="openModal('dlModal')" data-tilt-scale="1.05">
+        <img src="fashion_mnist.jpg" alt="classify images from the Fashion MNIST dataset using ANN">
+        <h3>Fashion Mnist using ANN</h3>
+        <p>Images Classification of Fasion Mnist Dataset</p>
+      </div>
+
+      <div class="card project dl js-tilt" onclick="openModal('bostonModal')" data-tilt-scale="1.05">
+        <img src="boston_house_prediction.jpg" alt="ANN Housing Regression">
+        <h3>ANN Housing Regression</h3>
+        <p>Boston Housing Regression with Neural Network</p>
+      </div>
+
+
+      <div class="card project dl js-tilt" onclick="openModal('digitsModal')" data-tilt-scale="1.05">
+        <img src="digits_mnist.jpg" alt="Handwritten Digit Classifier">
+        <h3>Handwritten Digit Classifier</h3>
+        <p>MNIST Handwritten Digit Image Classifier</p>
+      </div>
+
+
+      <div class="card project dl js-tilt" onclick="openModal('churnModal')" data-tilt-scale="1.05">
+        <img src="customer_churn_prediction.jpg" alt="Credit Card Customer Churn Prediction">
+        <h3>Credit Card Customer Churn Prediction</h3>
+        <p>Neural network predicts credit card churn.</p>
+      </div>
+
+
+
+      <div class="card project nlp ml js-tilt" onclick="openModal('fakeModal')" data-tilt-scale="1.05">
+        <img src="fake_news.jpg" alt="Fake News Detection">
+        <h3>Fake News Detection</h3>
+        <p>A machine learning project using NLP to detect and classify fake news articles.</p>
+      </div>
+
+</div>
+
+      <div class="modal" id="diabetesModal">
+  <div class="modal-content">
+    <h3>Diabetes Prediction</h3>
+    <img src="diabetes_prediction.jpg" alt="Diabetes Prediction Project">
+    <p>
+      Developed a Machine Learning model to predict the likelihood of diabetes in patients based on medical diagnostic measurements. 
+      The project involves data preprocessing, exploratory data analysis (EDA), and training classification algorithms.
+    </p>
+    <a href="https://github.com/Mayanksharma8853/Machine_Learning/blob/main/Diabetes%20.ipynb" target="_blank" style="color:var(--neon)">View on GitHub</a>
+    <div class="close" onclick="closeModal()">Close</div>
+  </div>
+    </div>
+  </section>
+
+  
+
+  <section data-aos="fade-up">
+    <h2 class="section-title">Internship</h2>
+    <div class="card js-tilt">
+      <p>
+        I worked as a Data Analysis Intern at <strong>Ideaz Marketing & Promotions</strong>. During the internship, 
+        I handled data cleaning, preprocessing, and basic analysis using Excel and Python. 
+        I assisted in identifying trends and patterns from datasets to support data-driven decision-making.
+        I contributed to preparing reports and summaries for assigned tasks.
+      </p>
+      <a href="internship_letter.pdf" download style="color:var(--neon); text-decoration:none; font-weight:bold;">Download Internship Letter</a>
+    </div>
+  </section>
+
+  <section data-aos="fade-up">
+    <h2 class="section-title">Career Vision</h2>
+    <div class="card js-tilt">
+      <p>
+       My career vision in data science is to become a highly skilled professional who designs intelligent, scalable, and ethical data-driven solutions. I aim to work on complex, real-world problems using advanced analytics and machine learning to drive strategic decision-making. In the long term, I aspire to lead impactful data initiatives, contribute to innovation, and help organizations use data as a core asset for growth and transformation.
+      </p>
+    </div>
+    
+  </section>
+
+  <section id="contact" data-aos="fade-up">
+    <h2 class="section-title">Contact</h2>
+    <div class="card">
+      <form onsubmit="event.preventDefault(); alert('Message sent!');">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea rows="4" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="modal" id="resumeModal">
+  <div class="modal-content">
+    <h3>Resume Parser</h3>
+    <img src="resume_parser.jpg" alt="Resume Parser Project">
+    <p>Python NLP project using Regular Expressions to extract name, phone, email, and skills from resumes.</p>
+    <a href="https://github.com/Mayanksharma8853/Resume_Parser_Project_NLP" target="_blank" style="color:var(--neon)">View on GitHub</a>
+    <div class="close" onclick="closeModal()">Close</div>
+  </div>
+</div>
+
+<div class="modal" id="emotionModal">
+  <div class="modal-content">
+    <h3>Emotion Classifier</h3>
+    <img src="emotion_classifier.jpg" alt="Emotion Classifier Project">
+    <p>Logistic Regression-based NLP model predicting emotions such as joy, sadness, fear, anger, surprise, and love.</p>
+    <a href="https://github.com/Mayanksharma8853/Emotion_Classifier_Project_NLP" target="_blank" style="color:var(--neon)">View on GitHub</a>
+    <div class="close" onclick="closeModal()">Close</div>
+  </div>
+</div>
+
+<div class="modal" id="restaurantModal">
+  <div class="modal-content">
+    <h3>Restaurant Review Classification</h3>
+    <img src="restaurant.jpg" alt="Restaurant Review Classification">
+    <p>Built a restaurant review classification model using Bag of Words and Naive Bayes to automatically identify positive and negative customer sentiments</p>
+    <a href="https://github.com/Mayanksharma8853/Restaurant_Review_Classification_NLP" target="_blank" style="color:var(--neon)">View on GitHub</a>
+    <div class="close" onclick="closeModal()">Close</div>
+  </div>
+</div>
+
+
+<div class="modal" id="imdbModal">
+  <div class="modal-content">
+    <h3>Restaurant Review Classification</h3>
+    <img src="imdb.jpg" alt="IMDB Project">
+    <p>IMDB movie review classification using Bag of Words and TF-IDF for sentiment analysis.</p>
+    <a href="https://github.com/Mayanksharma8853/IMDB_Movie_Review_Classification_NLP" target="_blank" style="color:var(--neon)">View on GitHub</a>
+    <div class="close" onclick="closeModal()">Close</div>
+  </div>
+</div>
+
+
+
+<div class="modal" id="weatherModal">
+  <div class="modal-content">
+    <h3>Weather Analytics Dashboard</h3>
+    <img src="weather_dashboard.jpg" alt="Weather Dashboard Project">
+    <p>Power BI dashboard showing temperature trends, humidity, rainfall, and forecast KPIs.</p>
+    <a href="https://github.com/Mayanksharma8853/Insight-Analytics" target="_blank" style="color:var(--neon)">View on GitHub</a>
+    <div class="close" onclick="closeModal()">Close</div>
+  </div>
+</div>
+
+
+<div class="modal" id="primeModal">
+  <div class="modal-content">
+    <h3>Amazon Prime Dashboard</h3>
+    <img src="prime_dashboard.jpg" alt="Weather Dashboard Project">
+    <p>Comprehensive Amazon Prime Video library analysis</p>
+    <a href="https://github.com/Mayanksharma8853/Insight-Analytics" target="_blank" style="color:var(--neon)">View on GitHub</a>
+    <div class="close" onclick="closeModal()">Close</div>
+  </div>
+</div>
+
+
+
+<div class="modal" id="blinkitModal">
+  <div class="modal-content">
+    <h3>Blinkit Sales Analysis</h3>
+    <img src="blinkit_dashboard.jpg" alt="Blinkit Dashboard Project">
+    <p>Comprehensive Power BI dashboard tracking $1.20M in total sales across various outlet types and locations.</p>
+    <a href="https://github.com/Mayanksharma8853/Insight-Analytics" target="_blank" style="color:var(--neon)">View on GitHub</a>
+    <div class="close" onclick="closeModal()">Close</div>
+  </div>
+</div>
+
+<div class="modal" id="accidentModal">
+  <div class="modal-content">
+    <h3>Road Accident Analysis</h3>
+    <img src="road_accident.jpg" alt="Road Accident Analysis Project">
+    <p>Visual analysis of 3368 total casualties, broken down by light conditions, surface type, and urban vs rural locations.</p>
+    <a href="https://github.com/Mayanksharma8853/Insight-Analytics" target="_blank" style="color:var(--neon)">View on GitHub</a>
+    <div class="close" onclick="closeModal()">Close</div>
+  </div>
+</div>
+
+<button class="menu-toggle" id="menuToggle">MENU</button>
+
+<div class="modal" id="dlModal">
+  <div class="modal-content">
+    <h3>Fashion Mnist using ANN</h3>
+    <img src="fashion_mnist.jpg" alt="Deep Learning Project">
+    <p>I developed a deep learning model using an Artificial Neural Network (ANN) to classify images from the Fashion MNIST dataset</p>
+    <a href="https://github.com/Mayanksharma8853/Fashion-Mnist-using-ANN" target="_blank" style="color:var(--neon)">View on GitHub</a>
+    <div class="close" onclick="closeModal()">Close</div>
+  </div>
+</div>
+
+
+<div class="modal" id="bostonModal">
+  <div class="modal-content">
+    <h3>ANN Housing Regression</h3>
+    <img src="boston_house_prediction.jpg" alt="Deep Learning Project">
+    <p>Designed and trained an Artificial Neural Network for regression-based housing price prediction on the Boston Housing dataset.</p>
+    <a href="https://github.com/Mayanksharma8853/Boston-House-Price-Prediction-" target="_blank" style="color:var(--neon)">View on GitHub</a>
+    <div class="close" onclick="closeModal()">Close</div>
+  </div>
+</div>
+
+<div class="modal" id="digitsModal">
+  <div class="modal-content">
+    <h3>Handwritten Digit Classifier</h3>
+    <img src="digits_mnist.jpg" alt="Deep Learning Project">
+    <p>An ANN-based classifier identifying handwritten digits from pixel data.</p>
+    <a href="https://github.com/Mayanksharma8853/MNIST_Handwritten_Digit_Image_Classifier" target="_blank" style="color:var(--neon)">View on GitHub</a>
+    <div class="close" onclick="closeModal()">Close</div>
+  </div>
+</div>
+
+<div class="modal" id="churnModal">
+  <div class="modal-content">
+    <h3>Credit Card Customer Churn Prediction</h3>
+    <img src="customer_churn_prediction.jpg" alt="Deep Learning Project">
+    <p>Predicting credit card customer retention using neural networks. Deep learning model identifying potential bank churn.</p>
+    <a href="https://github.com/Mayanksharma8853/Neural_Network_Predicts_Credit_Card_Churn" target="_blank" style="color:var(--neon)">View on GitHub</a>
+    <div class="close" onclick="closeModal()">Close</div>
+  </div>
+</div>
+
+
+<div class="modal" id="fakeModal">
+  <div class="modal-content">
+    <h3>Fake News Detection</h3>
+    <img src="fake_news.jpg" alt="Fake News Detection">
+    <p>An NLP-driven system that uses machine learning to automatically detect and flag misinformation in news articles.</p>
+    <a href="https://github.com/Mayanksharma8853/Fake_News_Detection_NLP" target="_blank" style="color:var(--neon)">View on GitHub</a>
+    <div class="close" onclick="closeModal()">Close</div>
+  </div>
+</div>
+
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+AOS.init({ duration: 1000, once: false, mirror: true });
+
+VanillaTilt.init(document.querySelectorAll(".js-tilt"), {
+    max: 15,
+    speed: 400,
+    glare: true,
+    "max-glare": 0.2,
+});
+
+particlesJS("particles-js", {
+  "particles": {
+    "number": { "value": 80 },
+    "color": { "value": "#38bdf8" },
+    "shape": { "type": "circle" },
+    "opacity": { "value": 0.5 },
+    "size": { "value": 3 },
+    "line_linked": {
+      "enable": true,
+      "distance": 150,
+      "color": "#38bdf8",
+      "opacity": 0.3,
+      "width": 1
+    },
+    "move": { "enable": true, "speed": 2 }
+  }
+});
+
+const menuToggle = document.getElementById("menuToggle");
+const sidebar = document.getElementById("sidebar");
+const main = document.getElementById("main");
+
+// Handle Scroll behavior for Desktop
+window.addEventListener("scroll", () => {
+    if (window.innerWidth > 1024) { // Only apply "scroll-to-reveal" on Desktop
+        if (window.scrollY > 420) {
+            sidebar.classList.add("active");
+            main.classList.add("shift");
+        } else {
+            sidebar.classList.remove("active");
+            main.classList.remove("shift");
+        }
+    }
+});
+
+// Mobile Menu Toggle Logic
+menuToggle.addEventListener("click", () => {
+    sidebar.classList.toggle("active");
+});
+
+// Close sidebar when clicking a link (useful for mobile)
+document.querySelectorAll(".sidebar a").forEach(link => {
+    link.addEventListener("click", () => {
+        if (window.innerWidth <= 1024) {
+            sidebar.classList.remove("active");
+        }
+    });
+});
+
+function filterProjects(e, cat){
+  document.querySelectorAll(".filters button").forEach(b=>b.classList.remove("active"));
+  e.currentTarget.classList.add("active");
+  document.querySelectorAll(".project").forEach(p=>{
+    p.style.display = (cat==="all"||p.classList.contains(cat))?"block":"none";
+  });
+}
+
+function openModal(id){
+  const modal = document.getElementById(id);
+  modal.style.display="flex";
+  document.body.classList.add("no-scroll"); // Disable page scroll
+  setTimeout(() => modal.classList.add('active'), 10);
+}
+function closeModal(){
+  document.querySelectorAll(".modal").forEach(m => {
+      m.classList.remove('active');
+      document.body.classList.remove("no-scroll"); // Enable page scroll
+      setTimeout(() => m.style.display="none", 300);
+  });
+}
+
+// Close modal when clicking outside of the content
+window.onclick = function(event) {
+    if (event.target.className === 'modal active') {
+        closeModal();
+    }
+}
+</script>
+
+</body>
+
+
+</html>
