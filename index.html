@@ -554,6 +554,90 @@ form button:hover{
     }
 } 
 
+/* ================= FEEDBACK EMOJI SLIDER ================= */
+
+#feedback form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Emoji display */
+#emoji {
+  display: inline-block;
+  font-size: 2.8rem;
+  transition: transform 0.3s ease;
+}
+
+/* Animate emoji slightly on change */
+input[type="range"]:active + #emoji {
+  transform: scale(1.2);
+}
+
+/* Slider base */
+#feedback input[type="range"] {
+  width: 100%;
+  margin: 10px 0 20px;
+  -webkit-appearance: none;
+  background: transparent;
+}
+
+/* Slider track */
+#feedback input[type="range"]::-webkit-slider-runnable-track {
+  height: 6px;
+  background: linear-gradient(90deg, var(--neon), var(--violet));
+  border-radius: 10px;
+}
+
+#feedback input[type="range"]::-moz-range-track {
+  height: 6px;
+  background: linear-gradient(90deg, var(--neon), var(--violet));
+  border-radius: 10px;
+}
+
+/* Slider thumb */
+#feedback input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  background: var(--neon);
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: -6px;
+  box-shadow: 0 0 12px rgba(34,211,238,0.7);
+}
+
+#feedback input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: var(--neon);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(34,211,238,0.7);
+}
+
+/* Feedback textarea */
+#feedback textarea {
+  resize: none;
+  background: #020617;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  padding: 14px;
+  color: var(--text-main);
+}
+
+#feedback textarea:focus {
+  outline: none;
+  border-color: var(--neon);
+  box-shadow: 0 0 15px rgba(34,211,238,0.3);
+}
+
+/* Submit button spacing fix */
+#feedback button {
+  margin-top: 5px;
+}
+
+
 </style>
 </head>
 
@@ -823,9 +907,6 @@ form button:hover{
   </div>
     </div>
   </section>
-
-  
-
   <section data-aos="fade-up">
     <h2 class="section-title">Internship</h2>
     <div class="card js-tilt">
@@ -849,27 +930,71 @@ form button:hover{
     
   </section>
 
-  <section id="contact" data-aos="fade-up">
-    <h2 class="section-title">Contact</h2>
-    <div class="card">
-      <form onsubmit="event.preventDefault(); alert('Message sent!');">
-        <input type="text" placeholder="Your Name" required>
-        <input type="email" placeholder="Your Email" required>
-        <textarea rows="4" placeholder="Your Message" required></textarea>
-        <button type="submit">Send Message</button>
-      </form>
-    </div>
-  </section>
+ <section id="contact" data-aos="fade-up">
+  <h2 class="section-title">Contact</h2>
+
+  <div class="card">
+    
+    <!-- 👇 ADD THIS LINE INSIDE THE GLASS CARD -->
+    <p style="
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      max-width: 650px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    ">
+      If you’d like to collaborate on a project or need guidance, feel free to reach out.
+    </p>
+
+    <form onsubmit="event.preventDefault(); alert('Message sent!');">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea rows="4" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+
+  </div>
+</section>
+<section id="feedback" data-aos="fade-up">
+  <h2 class="section-title">Feedback</h2>
+
+  <div class="card js-tilt">
+    <form id="feedbackForm">
+
+      <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:8px;">
+        Rate my portfolio
+      </p>
+
+      <div style="font-size:2.5rem; text-align:center; margin-bottom:10px;">
+        <span id="emoji">😐</span>
+      </div>
+
+      <input
+        type="range"
+        id="rating"
+        min="0"
+        max="5"
+        step="1"
+        value="3"
+      >
+
+      <textarea
+        id="feedbackText"
+        rows="4"
+        placeholder="Write your feedback..."
+        required
+      ></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <p id="feedbackMsg" style="display:none; margin-top:15px; color:var(--neon); font-weight:600;">
+      Thank you for your feedback!
+    </p>
+  </div>
+</section>
 
 </div>
-
-
-
-
-
-
-
-
 
 <div class="modal" id="resumeModal">
   <div class="modal-content">
@@ -1101,6 +1226,68 @@ window.onclick = function(event) {
         closeModal();
     }
 }
+
+
+const ratingSlider = document.getElementById("rating");
+const emoji = document.getElementById("emoji");
+
+const emojis = ["😡", "😕", "😐", "🙂", "😄", "🔥"];
+
+ratingSlider.addEventListener("input", () => {
+  emoji.textContent = emojis[ratingSlider.value];
+});
+
+document.getElementById("feedbackForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  this.reset();
+  emoji.textContent = "😐";
+
+  document.getElementById("feedbackMsg").style.display = "block";
+  setTimeout(() => {
+    document.getElementById("feedbackMsg").style.display = "none";
+  }, 3000);
+});
+
+
+
+document.getElementById("feedbackForm").addEventListener("submit", async function(e){
+  e.preventDefault();
+
+  const rating = document.getElementById("rating").value;
+  const feedback = document.getElementById("feedbackText").value;
+
+  await fetch("https://script.google.com/macros/s/AKfycbyy-jSC3FQpZ-vtlGPunPLVZ72A2ytID68rCYCF6MFlJYPrupD3KSFdAG38rU4eVThJcA/exec", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      type: "feedback",
+      rating: rating,
+      feedback: feedback
+    })
+  });
+
+  this.reset();
+  alert("Feedback submitted!");
+});
+
+
+document.getElementById("contactForm").addEventListener("submit", async function(e){
+  e.preventDefault();
+
+  await fetch("https://script.google.com/macros/s/AKfycbyy-jSC3FQpZ-vtlGPunPLVZ72A2ytID68rCYCF6MFlJYPrupD3KSFdAG38rU4eVThJcA/exec", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      type: "contact",
+      name: name.value,
+      email: email.value,
+      message: message.value
+    })
+  });
+
+  this.reset();
+  alert("Message sent!");
+});
 </script>
 
 </body>
