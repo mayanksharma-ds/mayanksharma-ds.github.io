@@ -650,8 +650,10 @@ form button:hover{
   
   <div class="sidebar-footer">
   <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px; font-size: 0.7rem;">
+      <p>👀 Profile Views: <span id="viewCount">1</span></p>
     <p style="margin-top: 5px;">📍 <strong>Location:</strong> Delhi, India</p>
     <p style="margin-top: 5px;">🚀 <strong>Open to:</strong> Internships / Junior Roles</p>
+  
   </div>
   <p style="margin-top: 15px; font-size: 0.65rem; opacity: 0.6;">&copy; 2026 Mayank Sharma. All rights reserved.</p>
 </div>
@@ -1247,6 +1249,17 @@ document.getElementById("contactForm").addEventListener("submit", function(e) {
     this.reset();
   });
 });
+// Profile views 
+let views = localStorage.getItem("profileViews");
+
+if (!views) {
+  views = 1;
+} else {
+  views = parseInt(views) + 1;
+}
+
+localStorage.setItem("profileViews", views);
+document.getElementById("viewCount").textContent = views;
 
 
 </script>
